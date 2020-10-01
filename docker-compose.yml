@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    image: analytics-postgres-i
+    container_name: analutics-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres12345
+      - PGPASSWORD=postgres12345
+      - POSTGRES_DB=jedi_db
+      - DATABASE_HOST=localhost
+    volumes:
+      - ./docker/db/init:/docker-entrypoint-initdb.d
+      - ./docker/work/data:/tmp/data
+
+  notebook:
+    build:
+      context: .
+      dockerfile: Dockerfile.notebook
+    image: analytics-notebook-i
+    container_name: analytics-notebook
+    ports:
+      - "8890:8888"
+    environment:
+      - PG_PORT=5432
+      - PG_USER=padawan
+      - PG_PASSWORD=padawan12345
+      - PG_DATABASE=jedi_db
+      - JUPYTER_ENABLE_LAB=yes
+    links:
+      - db
+    volumes:
+      - ./docker/work:/home/jovyan/work
+    command: start-notebook.sh --NotebookApp.token=''
