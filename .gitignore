@@ -130,3 +130,4 @@ dmypy.json
 
 # not upload
 docker/work/data/*
+docker/work/src/*
