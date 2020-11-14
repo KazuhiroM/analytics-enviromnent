@@ -11,6 +11,7 @@ ARG password=jovyan12345
 RUN echo "${username}:${password}" | chpasswd
 RUN gpasswd -a ${username} sudo
 RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN echo "Set disable_coredump false" >> /etc/sudo.conf
 USER jovyan
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
