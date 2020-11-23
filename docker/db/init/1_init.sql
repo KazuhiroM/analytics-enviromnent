@@ -1,5 +1,5 @@
 -- create user
-create user padawan password 'padawan12345';
-grant all on database jedi_db to padawan;
-grant pg_read_server_files to padawan ;
-grant pg_write_server_files to padawan ;
+create user jedi password 'jedi12345';
+grant all on database jedi_db to jedi;
+grant pg_read_server_files to jedi ;
+grant pg_write_server_files to jedi ;

@@ -3,8 +3,8 @@ USER root
 ENV DEBCONF_NOWARNINGS yes
 RUN apt-get update
 RUN apt-get install -y libpq-dev fonts-ipafont fonts-ipaexfont
-RUN cp /usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf /opt/conda/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/ipaexg.ttf
-RUN echo "font.family : IPAexGothic" >>  /opt/conda/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc
+RUN cp /usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf /opt/conda/lib/python3.8/site-packages/matplotlib/mpl-data/fonts/ttf/ipaexg.ttf
+RUN echo "font.family : IPAexGothic" >>  /opt/conda/lib/python3.8/site-packages/matplotlib/mpl-data/matplotlibrc
 RUN rm -rf ./.cache
 ARG username=jovyan
 ARG password=jovyan12345
@@ -15,7 +15,7 @@ RUN echo "Set disable_coredump false" >> /etc/sudo.conf
 USER jovyan
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
-RUN pip install --no-cache-dir ipython-sql==0.3.9
-RUN pip install --no-cache-dir psycopg2==2.8.5
-RUN pip install --no-cache-dir imblearn==0.0
+RUN pip install --no-cache-dir ipython-sql
+RUN pip install --no-cache-dir psycopg2
+RUN pip install --no-cache-dir imblearn
 RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"

@@ -29,8 +29,8 @@ services:
       - "8890:8888"
     environment:
       - PG_PORT=5432
-      - PG_USER=padawan
-      - PG_PASSWORD=padawan12345
+      - PG_USER=jedi
+      - PG_PASSWORD=jedi12345
       - PG_DATABASE=jedi_db
       - JUPYTER_ENABLE_LAB=yes
     links:
