@@ -2,17 +2,10 @@ FROM jupyter/datascience-notebook
 USER root
 ENV DEBCONF_NOWARNINGS yes
 RUN apt-get update
-<<<<<<< HEAD
 RUN apt-get install -y libpq-dev fonts-ipafont fonts-ipaexfont
 RUN cp /usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf /opt/conda/lib/python3.8/site-packages/matplotlib/mpl-data/fonts/ttf/ipaexg.ttf
 RUN echo "font.family : IPAexGothic" >>  /opt/conda/lib/python3.8/site-packages/matplotlib/mpl-data/matplotlibrc
 RUN rm -rf ./.cache
-=======
-#RUN apt-get install -y libpq-dev fonts-ipafont fonts-ipaexfont
-#RUN cp /usr/share/fonts/opentype/ipaexfont-gothic/ipaexg.ttf /opt/conda/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/ipaexg.ttf
-#RUN echo "font.family : IPAexGothic" >>  /opt/conda/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc
-#RUN rm -rf ./.cache
->>>>>>> b30565a5d1bed3ba79828affc2e38fc0faface3f
 ARG username=jovyan
 ARG password=jovyan12345
 RUN echo "${username}:${password}" | chpasswd
