@@ -4,9 +4,9 @@ services:
   db:
     build:
       context: .
-      dockerfile: Dockerfile.postgres
-    image: analytics-postgres-i
-    container_name: analutics-postgres
+      dockerfile: dockerfiles/postgres/Dockerfile
+    image: dal-postgres
+    container_name: dal-postgres
     ports:
       - "5433:5432"
     environment:
@@ -22,9 +22,9 @@ services:
   notebook:
     build:
       context: .
-      dockerfile: Dockerfile.notebook
-    image: analytics-notebook-i
-    container_name: analytics-notebook
+      dockerfile: dockerfiles/notebook/Dockerfile
+    image: dal-notebook
+    container_name: dal-notebook
     ports:
       - "8890:8888"
     environment:
@@ -32,9 +32,10 @@ services:
       - PG_USER=jedi
       - PG_PASSWORD=jedi12345
       - PG_DATABASE=jedi_db
-      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_ENABLE_LAB=no
     links:
       - db
     volumes:
+      - ./docker/doc:/home/jovyan/doc
       - ./docker/work:/home/jovyan/work
     command: start-notebook.sh --NotebookApp.token=''
