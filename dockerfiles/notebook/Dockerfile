@@ -10,7 +10,7 @@ RUN apt-get update \
     && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
     && apt-get update \
-    && apt-get install -y --no-install-recommends libpq-dev=13.4-1.pgdg20.04+1 \
+    && apt-get install -y --no-install-recommends libpq-dev=14.0-1.pgdg20.04+1 \
     && apt-get remove -y lsb-release gnupg \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
@@ -20,10 +20,8 @@ WORKDIR /home/jovyan
 COPY Pipfile .
 COPY Pipfile.lock .
 
-# Jupyter LabでRを扱えるようにする処理も行っている (参考: https://www.tmp1024.com/install-jupyter-lab-with-r-on-mac/#toc6 )
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
     && rm Pipfile* \
-    && Rscript -e "install.packages(c('IRkernel', 'DBI', 'RPostgreSQL', 'rsample'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')" \
-    && Rscript -e "IRkernel::installspec()"
-#RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'recipes'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
+    && Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'themis'), dependencies = TRUE, error = TRUE, repos='https://cran.microsoft.com/snapshot/2021-10-05/')"
+    
