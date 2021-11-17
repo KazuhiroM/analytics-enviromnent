@@ -7,11 +7,11 @@ ENV DEBCONF_NOWARNINGS yes
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt update \
     && apt-get update \
-    && apt-get install -y --no-install-recommends lsb-release=11.1.0ubuntu2 gnupg=2.2.19-3ubuntu2.1 vim \
+    && apt-get install -y --no-install-recommends lsb-release gnupg \
     && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
     && apt-get update \
-    && apt-get install -y --no-install-recommends libpq-dev=14.0-1.pgdg20.04+1 \
+    && apt-get install -y --no-install-recommends libpq-dev \
     && apt-get remove -y lsb-release gnupg \
     && apt-get autoremove -y \
     && apt-get install -y fonts-ipafont fonts-ipaexfont \
