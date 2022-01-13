@@ -35,9 +35,7 @@ WORKDIR /home/jovyan
 COPY Pipfile .
 COPY Pipfile.lock .
 
-# Jupyter LabでRを扱えるようにする処理も行っている (参考: https://www.tmp1024.com/install-jupyter-lab-with-r-on-mac/#toc6 )
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
     && rm Pipfile* \
-    && RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'recipes'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
-
+    && Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'themis'), dependencies = TRUE, error = TRUE, repos='https://cran.microsoft.com/snapshot/2021-10-05/')"
